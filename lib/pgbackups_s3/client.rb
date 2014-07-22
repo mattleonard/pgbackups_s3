@@ -11,6 +11,6 @@ class PgbackupsS3
   end
 
   def get_latest_backup
-    self.class.get('/client/latest_backup')
+    self.class.get('https://pgbackups.herokuapp.com:443/client/latest_backup')
   end
 end
