@@ -11,4 +11,5 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
 
   s.add_runtime_dependency 'aws-sdk', '>= 1.0'
+  s.add_runtime_dependency 'httparty', '>= 0.12.0'
 end

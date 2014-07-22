@@ -1,23 +1,17 @@
-require 'rest_client'
+require 'httparty'
 
 class PgbackupsS3
+  include HTTParty
 
-  def initialize(args)
-    @client = URI.parse(ENV['PGBACKUPS_URL'])
-  end
-
-  def authenticated_resource(path)
+  def initialize
+    @uri = URI.parse(ENV['PGBACKUPS_URL'])
     host = "#{@uri.scheme}://#{@uri.host}"
     host += ":#{@uri.port}" if @uri.port
-    RestClient::Resource.new("#{host}#{path}",
-      :user     => @uri.user,
-      :password => @uri.password,
-      :headers  => {:x_heroku_gem_version => Heroku::Client.version}
-    )
+    self.base_uri = host
+    self.class.basic_auth @uri.user, @uri.password
   end
 
   def get_latest_backup
-    resource = authenticated_resource("/client/latest_backup")
-    json_decode get(resource).body
+    self.class.get('/client/latest_backup')
   end
 end
