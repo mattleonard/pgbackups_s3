@@ -14,6 +14,6 @@ PgbackupsS3.configure do |config|
 
   # Input your amazon credentials
   # Required
-  config.access_key_id = 'YOUR_AWS_ACCESS_KEY',
+  config.access_key_id = 'YOUR_AWS_ACCESS_KEY'
   config.secret_access_key = 'YOUR_AWS_SECRET_ACCESS_KEY'
 end

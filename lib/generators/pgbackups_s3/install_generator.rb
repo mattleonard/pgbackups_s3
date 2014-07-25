@@ -7,7 +7,7 @@ class PgbackupsS3
       def copy_initializer
         template "pgbackups_s3_initializer.rb", "config/initializers/pgbackups_s3.rb"
 
-        puts "Install complete!"
+        puts "Your data is almost safe! Just fill out the 'config/initializers/pgbackups_s3.rb' and you'll be good to go"
       end
     end
   end
