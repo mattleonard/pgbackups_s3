@@ -16,7 +16,8 @@ class PgbackupsS3
   end
 
   class Configuration
-    attr_accessor :bucket, :directories, :access_key_id, :secret_access_key
+    attr_accessor :bucket, :directories, :access_key_id, :secret_access_key,
+                  :capture_database, :restore_database
 
     def bucket
       @bucket ||= 'pgbackups_s3'
@@ -26,5 +27,12 @@ class PgbackupsS3
       @directories ||= 'backups'
     end
 
+    def capture_database
+      @capture_database ||= 'DATABASE_URL'
+    end
+
+    def restore_database
+      @restore_database ||= 'DATABASE_URL'
+    end
   end
 end

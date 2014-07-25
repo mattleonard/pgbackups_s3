@@ -33,6 +33,8 @@ class PgbackupsS3
     @tmp_file = "./tmp/#{DateTime.now.strftime('%k:%M:%S')}.dump"
     @bucket = PgbackupsS3.configuration.bucket
     @directories = PgbackupsS3.configuration.directories
+    @capture_database = PgbackupsS3.configuration.capture_database
+    @restore_database = PgbackupsS3.configuration.restore_database
     File.new(@tmp_file, 'w+')
 
     @s3 = AWS::S3.new(
@@ -46,7 +48,7 @@ class PgbackupsS3
   end
 
   def capture
-    params = {:from_url => ENV['DATABASE_URL'], :from_name => ENV['DATABASE_URL'], :to_url => nil, :to_name => 'BACKUP', expire: true}
+    params = {:from_url => ENV[@capture_database], :from_name => ENV[@capture_database], :to_url => nil, :to_name => 'BACKUP', expire: true}
     backup = self.class.post("#{@host}/client/transfers", query: params)
 
     print "Wrangling up that postgres\n"
@@ -61,7 +63,7 @@ class PgbackupsS3
   end
 
   def download
-    print "Downloading\n"
+    print "Downloading that postgres\n"
     File.open(@tmp_file, "wb") do |output|
       streamer = lambda do |chunk, remaining_bytes, total_bytes|
         print '.'
@@ -69,14 +71,14 @@ class PgbackupsS3
       end
       Excon.get(@backup_url, :response_block => streamer)
     end
-    print "\nSaved as #{@tmp_file}\n"
+    print "\nSaved as #{@tmp_file} on local server\n"
   end
 
   def send_to_s3
-    print "Sending to S3\t"
+    print "Shipping that sucka to S3\t"
     key = File.basename(@tmp_file)
     @s3.buckets[@bucket].objects["#{@directories}/#{Date.today.year}/6/#{Date.today.day}/#{key}"].write(:file => @tmp_file)
-    puts "Uploading file #{@tmp_file} to bucket #{@bucket}."
+    puts "Backup uploaded to #{@bucket} bucket."
   end
 
   def clean
@@ -103,7 +105,7 @@ class PgbackupsS3
     if input == 'Give me my data!'
       object = @s3.buckets[@bucket].objects.with_prefix(key).first
       object.acl = :public_read
-      params = {:to_url => ENV['DATABASE_URL'], :to_name => ENV['DATABASE_URL'], :from_url => object.public_url, :from_name => "EXTERNAL_BACKUP"}
+      params = {:to_url => ENV[@restore_database], :to_name => ENV[@restore_database], :from_url => object.public_url, :from_name => "EXTERNAL_BACKUP"}
       backup = self.class.post("#{@host}/client/transfers", query: params)
       sleep 20
       object.acl = :private
