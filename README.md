@@ -46,6 +46,38 @@ To specify a specific day of backups, run:
 
 `PgbackupsS3.list_backups(YEAR, MONTH, DAY)`
 
-This command will print out the keys of all the backups
+This command will print out the keys of all the backups like so:
 
-###
+<pre><code>Backups for 7-25-2014 -----------------------
+-- backups/2014/7/25/21:16:14.dump
+-- backups/2014/7/25/21:17:52.dump
+-- backups/2014/7/25/21:19:00.dump
+-- backups/2014/7/25/21:19:43.dump
+-- backups/2014/7/25/21:20:22.dump
+-- backups/2014/7/25/21:21:32.dump
+-- backups/2014/7/25/21:22:13.dump
+</code></pre>
+
+### To restore from a backup
+
+WARNING: This will wipe out all data in your specified restore database, 'DATABASE_URL' is the default, with the backup.
+
+Take one of the above keys and enter it as the param for the following function
+
+`PgbackupsS3.restore('backups/2014/7/25/21:22:13.dump')`
+
+You will have to confirm the restore but the database specified will be overwritten with your backup data.
+
+## Contributions
+
+Feel free to contribute or improve the code. Just fork the repo and open a pull request with you code. Also if you there are any issues just go ahead and create a new issue.
+
+## License
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
