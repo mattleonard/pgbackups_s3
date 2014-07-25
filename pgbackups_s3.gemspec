@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = %w{Send pgbackups to S3 using aws_sdk}
   s.authors     = ["Matt Leonard"]
   s.email       = 'mattleonardco@gmail.com'
-  s.files       = ["lib/pgbackups_s3.rb", "lib/pgbackups_s3/client.rb"]
+  s.files       = ["lib/pgbackups_s3.rb", "lib/pgbackups_s3/client.rb", "lib/pgbackups_s3/configuration.rb"]
   s.homepage    = 'http://mattl.co'
   s.license     = 'MIT'
 

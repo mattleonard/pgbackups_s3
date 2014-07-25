@@ -1,12 +1,6 @@
 class PgbackupsS3
   include HTTParty
 
-  attr_accessor :configuration
-
-  def self.configure
-    self.configuration ||= Configuration.new
-    yield(configuration)
-  end
 
   def self.backup
     p = new
@@ -42,8 +36,8 @@ class PgbackupsS3
     File.new(@tmp_file, 'w+')
 
     @s3 = AWS::S3.new(
-      access_key_id:  PgbackupsS3.config.access_key_id,
-      secret_access_key: PgbackupsS3.config.secret_access_key
+      access_key_id:  PgbackupsS3.configuration.access_key_id,
+      secret_access_key: PgbackupsS3.configuration.secret_access_key
     )
   end
 
