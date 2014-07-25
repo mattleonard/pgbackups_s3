@@ -3,9 +3,10 @@ PgbackupsS3.configure do |config|
   # Defaults to 'DATABASE_URL'
   # Example of other is 'HEROKU_POSTGRESQL_GRAY_URL'
   # config.capture_database = 'DATABASE_URL'
-  # config.restore_databse = 'DATABASE_URL'
+  # config.restore_database = 'DATABASE_URL'
 
   # Change this to the S3 bucket name you want the backups to go into
+  # Defaults to 'pgbackups_s3'
   # config.bucket = 'YOUR_BUCKET_NAME'
 
   # This specifies the directories the backups will go in within your bucket
