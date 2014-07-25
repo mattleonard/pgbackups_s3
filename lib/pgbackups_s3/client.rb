@@ -77,7 +77,7 @@ class PgbackupsS3
   def send_to_s3
     print "Shipping that sucka to S3\t"
     key = File.basename(@tmp_file)
-    @s3.buckets[@bucket].objects["#{@directories}/#{Date.today.year}/6/#{Date.today.day}/#{key}"].write(:file => @tmp_file)
+    @s3.buckets[@bucket].objects["#{@directories}/#{Date.today.year}/#{Date.today.month}/#{Date.today.day}/#{key}"].write(:file => @tmp_file)
     puts "Backup uploaded to #{@bucket} bucket."
   end
 
