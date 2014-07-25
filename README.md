@@ -8,7 +8,7 @@ allows you restore your current database from any of the backups on S3.
 
 To install on your system
 
-`gem install pgbackups`
+`gem install pgbackups_s3`
 
 To install in rails app, add the following line to your Gemfile
 
