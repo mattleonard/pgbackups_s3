@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'pgbackups_s3'
-  s.version     = '0.0.3'
+  s.version     = '0.0.4'
   s.date        = '2014-07-25'
   s.summary     = %w{Send pgbackups to S3 using aws_sdk}
   s.description = %w{Send pgbackups to S3 using aws_sdk. This gem also allows
