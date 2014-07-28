@@ -1,6 +1,10 @@
 class PgbackupsS3
   include HTTParty
 
+  def self.setup
+    p = new
+    p.create_bucket
+  end
 
   def self.backup
     p = new
@@ -41,6 +45,11 @@ class PgbackupsS3
       access_key_id:  PgbackupsS3.configuration.access_key_id,
       secret_access_key: PgbackupsS3.configuration.secret_access_key
     )
+  end
+
+  def create_bucket
+    bucket = @s3.buckets.create(@bucket)
+    bucket.acl = :private
   end
 
   def get_latest_backup

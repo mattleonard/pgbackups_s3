@@ -22,6 +22,12 @@ Then create the initialzer that will hold all the settings for the packups
 
 Go to `config/initializers/pgbackups_s3.rb` and follow the documentation to get your backups cranking!
 
+After the initializer is all setup, run:
+
+`rake pgbackups_s3:setup`
+
+if you need to create the bucket on S3
+
 ## Using the gem
 
 ### Back dat database up
