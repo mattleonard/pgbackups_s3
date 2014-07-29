@@ -74,6 +74,19 @@ Take one of the above keys and enter it as the param for the following function
 
 You will have to confirm the restore but the database specified will be overwritten with your backup data.
 
+## Configuring your Amazon S3 bucket to archive and drop old backups
+
+If you want to archive your postgres backups to Amazon Glacier and/or delete them after so many days, you'll need to set up a Lifecycle for your bucket.
+
+To set this up
+
+* Go into you AWS console
+* Click on S3
+* Click on the bucket you have setup in the initalizer
+* Once in your bucket, click on properties
+* Then open the lifecycle, and click 'add rule'
+* Then just follow the instructions
+
 ## Contributions
 
 Feel free to contribute or improve the code. Just fork the repo and open a pull request with you code. Also if you there are any issues just go ahead and create a new issue.
