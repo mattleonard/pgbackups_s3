@@ -16,7 +16,7 @@ To install in rails app, add the following line to your Gemfile
 
 Then run: `bundle install`
 
-Then create the initialzer that will hold all the settings for the packups
+Then create the initializer that will hold all the settings for the backups
 
 `rails g pgbackups_s3:install`
 
@@ -30,7 +30,7 @@ if you need to create the bucket on S3
 
 ## Using the gem
 
-### Back dat database up
+### Back that database up
 
 To run a backup you can either run it in the rails console:
 
